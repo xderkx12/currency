@@ -1,0 +1,70 @@
+.page {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    
+    .filtration {
+      background-color: #f1f3f4; // Светлый фон для блока фильтрации
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Легкая тень
+      max-width: 100%;
+      display: flex;
+      justify-content: center;
+  
+      form {
+        display: flex;
+        flex-wrap: wrap; // Позволяет элементам переноситься на новые строки при необходимости
+        align-items: center;
+        gap: 15px; // Расстояние между элементами формы
+  
+        label {
+          font-size: 16px;
+          font-weight: 500;
+          margin-right: 10px;
+        }
+  
+        input[type="date"],
+        select {
+          padding: 8px 12px;
+          font-size: 16px;
+          border: 1px solid #ced4da;
+          border-radius: 5px;
+          outline: none;
+          transition: border-color 0.3s ease-in-out;
+  
+          &:focus {
+            border-color: #007bff; // Изменение цвета рамки при фокусе
+          }
+        }
+  
+        input[type="submit"] {
+          background-color: #007bff;
+          color: white;
+          padding: 10px 20px;
+          font-size: 16px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease-in-out;
+  
+          &:hover {
+            background-color: #0056b3; // Цвет при наведении
+          }
+        }
+      }
+    }
+  }
+  
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .filtration form {
+      flex-direction: column; // Переход на вертикальное выравнивание на мобильных
+      gap: 10px;
+    }
+  
+    .filtration {
+      padding: 10px;
+    }
+  }
+  
