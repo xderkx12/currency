@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { CurrencyRatesPageComponent } from './Pages/currency-rates-page/currency-rates-page.component';
 import { ArchivePageComponent } from './Pages/archive-page/archive-page.component';
 import { HeadComponent } from './Shared/Components/head/head.component';
+import { CurrencyElementComponent } from './Shared/Components/currency-element/currency-element.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CurrencyRatesPageComponent,
     ArchivePageComponent,
-    HeadComponent
+    HeadComponent,
+    CurrencyElementComponent
   ],
   imports: [
     BrowserModule,
