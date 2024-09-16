@@ -7,6 +7,9 @@ import { CurrencyRatesPageComponent } from './Pages/currency-rates-page/currency
 import { ArchivePageComponent } from './Pages/archive-page/archive-page.component';
 import { HeadComponent } from './Shared/Components/head/head.component';
 import { CurrencyElementComponent } from './Shared/Components/currency-element/currency-element.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CurrencyHTTPService } from './Shared/Services/currency-http-service.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,9 +21,11 @@ import { CurrencyElementComponent } from './Shared/Components/currency-element/c
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule 
   ],
-  providers: [],
+  providers: [CurrencyHTTPService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
