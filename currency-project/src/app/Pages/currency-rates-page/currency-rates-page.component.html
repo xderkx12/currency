@@ -1,1 +1,38 @@
-<p>currency-rates-page works!</p>
+<div class="page">
+    <div class="filtration">
+    <form (ngSubmit)="onSubmit()">
+        <label>Выберите дату:</label>
+        <input [(ngModel)]="selectedDate" name="date" type="date" required>
+
+        <label>Выберите валюту:</label>
+        <select [(ngModel)]="selectedCurrency" name="currency" required>
+            <option value="null">Все валюты...</option>
+            <option *ngFor="let currency of currencies" [value]="currency.Cur_Abbreviation">
+                {{ currency.Cur_Name }} ({{ currency.Cur_Abbreviation }})
+            </option>
+        </select>
+
+        <input type="submit" value="Отправить">
+    </form>
+
+    </div>
+
+    <div class="currency-rate">
+        <table>
+            <thead>
+                <tr>
+                    <th>Валюта</th>
+                    <th>Количество</th>
+                    <th>Стоимость</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let currency of filtredCurrencies">
+                    <td>{{currency.Cur_Name}} [{{currency.Cur_Abbreviation}}]</td>
+                    <td>{{currency.Cur_Scale}}</td>
+                    <td>{{currency.Cur_OfficialRate}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

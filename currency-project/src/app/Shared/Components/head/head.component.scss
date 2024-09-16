@@ -1,0 +1,48 @@
+.head {
+    background-color: #f8f9fa; // Светлый фон для шапки
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Легкая тень
+  
+    nav {
+      max-width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center; // Равномерное размещение пунктов навигации
+  
+      ul {
+        list-style: none;
+        display: flex;
+        gap: 20px; // Расстояние между элементами списка
+  
+        li {
+          a {
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            color: #007bff; // Цвет ссылок
+            transition: color 0.3s ease-in-out; // Плавный переход цвета при наведении
+  
+            &:hover,
+            &.active {
+              color: #0056b3; // Цвет при наведении или активном состоянии
+            }
+  
+            &::before {
+              content: '';
+              display: block;
+              height: 3px;
+              width: 0;
+              background-color: #007bff;
+              transition: width 0.3s ease-in-out;
+            }
+  
+            &:hover::before,
+            &.active::before {
+              width: 100%; // Полоса под текстом при наведении или активном состоянии
+            }
+          }
+        }
+      }
+    }
+  }
+  
