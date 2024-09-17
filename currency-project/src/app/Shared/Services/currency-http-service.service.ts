@@ -4,7 +4,6 @@ import { forkJoin, map, Observable } from 'rxjs';
 import { Currency } from '../Types/currency';
 import { DateConverterService } from './date-converter-service.service';
 import { ArrayUtilsService } from './array-utils.service';
-import { CurrencyRequestService } from './currency-request.service';
 
 @Injectable({
   providedIn: 'root'
@@ -55,10 +54,24 @@ export class CurrencyHTTPService {
     const start = new Date(startDate);
     const end = new Date(endDate);
     const dates = DateConverterService.getMonthlyDatesInRange(start, end);
-    const requests = this.currencyRequester.generateCurrencyRequests(dates, currencyId);
+    const requests = this.generateCurrencyRequests(dates, currencyId);
 
     return forkJoin(requests).pipe(
       map(ArrayUtilsService.flattenResults)
     );
+  }
+
+  /**
+   * Generates HTTP requests for fetching currency rates for a list of dates.
+   * 
+   * @param dates - Array of dates in the format "Date[]".
+   * @param currencyId - Currency identifier.
+   * @returns Observable<Currency[]>[] - Array of HTTP requests for each date.
+   */
+  private generateCurrencyRequests(dates: Date[], currencyId: string): Observable<Currency[]>[] {
+    return dates.map(date => {
+      const formattedDate = DateConverterService.getFormattedDate(date);
+      return this.getCurrencyRateOnDate(formattedDate, currencyId);
+    });
   }
 }
