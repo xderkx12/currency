@@ -15,7 +15,7 @@ export class CurrencyHTTPService {
     return this.http.get<Currency[]>(this.apiUrl + 'rates?periodicity=0');
   }
   
-  getCurrenciesOnDate(date: Date): Observable<Currency[]> {
+  getCurrenciesOnDate(date: string): Observable<Currency[]> {
     return this.http.get<Currency[]>(this.apiUrl + 'rates?ondate=' + date + '&periodicity=0')
   }
 }
