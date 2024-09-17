@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { forkJoin, map, Observable } from 'rxjs';
 import { Currency } from '../Types/currency';
+import { DateConverterService } from './date-converter-service.service';
+import { ArrayUtilsService } from './array-utils.service';
+import { CurrencyRequestService } from './currency-request.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +12,53 @@ import { Currency } from '../Types/currency';
 export class CurrencyHTTPService {
 
   private apiUrl = 'https://api.nbrb.by/exrates/';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private currencyRequester: CurrencyRequestService) { }
 
+  /**
+   * Fetches the list of all currencies with periodicity = 0 (daily).
+   * 
+   * @returns Observable<Currency[]> - Array of currency objects.
+   */
   getCurrencies(): Observable<Currency[]> {
     return this.http.get<Currency[]>(this.apiUrl + 'rates?periodicity=0');
   }
   
+  /**
+   * Fetches the list of currencies on a specific date.
+   * 
+   * @param date - Date in the format "yyyy-mm-dd".
+   * @returns Observable<Currency[]> - Array of currency objects for the specified date.
+   */
   getCurrenciesOnDate(date: string): Observable<Currency[]> {
     return this.http.get<Currency[]>(this.apiUrl + 'rates?ondate=' + date + '&periodicity=0')
+  }
+
+  /**
+   * Fetches the exchange rate for a specific currency on a given date.
+   * 
+   * @param date - Date in the format "yyyy-mm-dd".
+   * @param currencyId - Currency identifier.
+   * @returns Observable<Currency[]> - Array of currency objects with rates for the specified currency and date.
+   */
+  getCurrencyRateOnDate(date: string, currentId: string): Observable<Currency[]> {
+    return this.http.get<Currency[]>(this.apiUrl + 'rates/' + currentId + '?ondate=' + date);
+  }
+
+  /**
+    * get the exchange rates on the date range in one month increments
+    * @param StartDate start date in the format "yyyy-mm-dd"
+    * @param EndDate end date in the format "yyyy-mm-dd"
+    * @param CurrencyID currency identifier
+    * @returns Observable<Currency[]> array of currencies for each month in the interval
+  */
+  getCurrenciesOnIntervalDate(startDate: string, endDate: string, currencyId: string): Observable<Currency[]> {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const dates = DateConverterService.getMonthlyDatesInRange(start, end);
+    const requests = this.currencyRequester.generateCurrencyRequests(dates, currencyId);
+
+    return forkJoin(requests).pipe(
+      map(ArrayUtilsService.flattenResults)
+    );
   }
 }
