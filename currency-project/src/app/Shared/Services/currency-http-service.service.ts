@@ -11,7 +11,7 @@ import { ArrayUtilsService } from './array-utils.service';
 export class CurrencyHTTPService {
 
   private apiUrl = 'https://api.nbrb.by/exrates/';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private currencyRequester: CurrencyRequestService) { }
 
   /**
    * Fetches the list of all currencies with periodicity = 0 (daily).
