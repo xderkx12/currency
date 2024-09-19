@@ -17,15 +17,7 @@
             <input type="submit" value="Отправить">
         </form>
     </div>
-
-    <div class="chart-container" *ngIf="chartData"></div>
-        <canvas baseChart
-                [data]="chartData"
-                [labels]="chartLabels"
-                [options]="chartOptions"
-                [legend]="chartLegend"
-                [plugins]="chartPlugins"
-                [chartType]="chartType">
-        </canvas>
+    <div class="continer-graph" *ngIf="isShowGraph">
+        <app-currency-chart [chartData]="chartData" [chartLabel]="chartLabel"></app-currency-chart>
     </div>
 </div>
