@@ -10,6 +10,7 @@ import { CurrencyElementComponent } from './Shared/Components/currency-element/c
 import { HttpClientModule } from '@angular/common/http';
 import { CurrencyHTTPService } from './Shared/Services/currency-http-service.service';
 import { FormsModule } from '@angular/forms';
+import { CurrencyChartComponent } from './Shared/Components/currency-chart/currency-chart.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     CurrencyRatesPageComponent,
     ArchivePageComponent,
     HeadComponent,
-    CurrencyElementComponent
+    CurrencyElementComponent,
+    CurrencyChartComponent
   ],
   imports: [
     BrowserModule,
