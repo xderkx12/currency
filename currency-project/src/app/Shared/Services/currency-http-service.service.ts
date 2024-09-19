@@ -36,25 +36,25 @@ export class CurrencyHTTPService {
    * Fetches the exchange rate for a specific currency on a given date.
    * 
    * @param date - Date in the format "yyyy-mm-dd".
-   * @param currencyId - Currency identifier.
+   * @param currentAbbreviation - Currency identifier.
    * @returns Observable<Currency[]> - Array of currency objects with rates for the specified currency and date.
    */
-  getCurrencyRateOnDate(date: string, currentId: string): Observable<Currency[]> {
-    return this.http.get<Currency[]>(this.apiUrl + 'rates/' + currentId + '?ondate=' + date);
+  getCurrencyRateOnDate(date: string, currentAbbreviation: string): Observable<Currency[]> {
+    return this.http.get<Currency[]>(this.apiUrl + 'rates/' + currentAbbreviation + '?parammode=2&ondate=' + date);
   }
 
   /**
     * get the exchange rates on the date range in one month increments
     * @param StartDate start date in the format "yyyy-mm-dd"
     * @param EndDate end date in the format "yyyy-mm-dd"
-    * @param CurrencyID currency identifier
+    * @param currentAbbreviation currency identifier
     * @returns Observable<Currency[]> array of currencies for each month in the interval
   */
-  getCurrenciesOnIntervalDate(startDate: string, endDate: string, currencyId: string): Observable<Currency[]> {
+  getCurrenciesOnIntervalDate(startDate: string, endDate: string, currentAbbreviation: string): Observable<Currency[]> {
     const start = new Date(startDate);
     const end = new Date(endDate);
     const dates = DateConverterService.getMonthlyDatesInRange(start, end);
-    const requests = this.generateCurrencyRequests(dates, currencyId);
+    const requests = this.generateCurrencyRequests(dates, currentAbbreviation);
 
     return forkJoin(requests).pipe(
       map(ArrayUtilsService.flattenResults)
@@ -65,13 +65,13 @@ export class CurrencyHTTPService {
    * Generates HTTP requests for fetching currency rates for a list of dates.
    * 
    * @param dates - Array of dates in the format "Date[]".
-   * @param currencyId - Currency identifier.
+   * @param currentAbbreviation - Currency identifier.
    * @returns Observable<Currency[]>[] - Array of HTTP requests for each date.
    */
-  private generateCurrencyRequests(dates: Date[], currencyId: string): Observable<Currency[]>[] {
+  private generateCurrencyRequests(dates: Date[], currentAbbreviation: string): Observable<Currency[]>[] {
     return dates.map(date => {
       const formattedDate = DateConverterService.getFormattedDate(date);
-      return this.getCurrencyRateOnDate(formattedDate, currencyId);
+      return this.getCurrencyRateOnDate(formattedDate, currentAbbreviation);
     });
   }
 }
