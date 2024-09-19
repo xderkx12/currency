@@ -7,10 +7,9 @@ import { DateConverterService } from '../../Shared/Services/date-converter-servi
 @Component({
   selector: 'app-currency-rates-page',
   templateUrl: './currency-rates-page.component.html',
-  styleUrls: ['./currency-rates-page.component.scss'] // исправлено styleUrl на styleUrls
+  styleUrls: ['./currency-rates-page.component.scss'], // исправлено styleUrl на styleUrls
 })
 export class CurrencyRatesPageComponent {
-
   currencies: Currency[] = [];
   currenciesOnDate: Currency[] = [];
   filtredCurrencies: Currency[] = [];
@@ -19,7 +18,10 @@ export class CurrencyRatesPageComponent {
   selectedDate: string | null = null;
   selectedCurrency: string | null = null;
 
-  constructor(private currencyHTTPService: CurrencyHTTPService, private currenciesService: CurrenciesService) {}
+  constructor(
+    private currencyHTTPService: CurrencyHTTPService,
+    private currenciesService: CurrenciesService,
+  ) {}
 
   //initialization all elements on page
   ngOnInit(): void {
@@ -35,8 +37,10 @@ export class CurrencyRatesPageComponent {
 
   //get and set all currencies from API
   private initializeCurrencies(): void {
-    this.currencyHTTPService.getCurrencies().subscribe(data => {
-      this.currencies = this.currenciesService.sortByName(this.currenciesService.getUniqCurrencies(data));
+    this.currencyHTTPService.getCurrencies().subscribe((data) => {
+      this.currencies = this.currenciesService.sortByName(
+        this.currenciesService.getUniqCurrencies(data),
+      );
       this.showAllCurrenciesToday();
     });
   }
@@ -49,7 +53,9 @@ export class CurrencyRatesPageComponent {
   //the function that is triggered when processing the form
   onSubmit(): void {
     if (this.selectedCurrency) {
-      this.selectedCurrency === 'null' ? this.showAllCurrenciesOnDate() : this.filterSelectedCurrency();
+      this.selectedCurrency === 'null'
+        ? this.showAllCurrenciesOnDate()
+        : this.filterSelectedCurrency();
     } else {
       this.showAllCurrenciesToday();
     }
@@ -60,21 +66,29 @@ export class CurrencyRatesPageComponent {
   private filterSelectedCurrency(): void {
     if (this.selectedDate) {
       this.getCurrenciesOnDate(() => {
-        this.filtredCurrencies = this.currenciesOnDate.filter(currency => currency.Cur_Abbreviation === this.selectedCurrency);
+        this.filtredCurrencies = this.currenciesOnDate.filter(
+          (currency) => currency.Cur_Abbreviation === this.selectedCurrency,
+        );
       });
     } else {
-      this.filtredCurrencies = this.currencies.filter(currency => currency.Cur_Abbreviation === this.selectedCurrency);
+      this.filtredCurrencies = this.currencies.filter(
+        (currency) => currency.Cur_Abbreviation === this.selectedCurrency,
+      );
     }
   }
-  
+
   //get currencies on selected date
   private getCurrenciesOnDate(callback?: () => void): void {
     if (!this.selectedDate) return;
-    
-    this.currencyHTTPService.getCurrenciesOnDate(this.selectedDate).subscribe(data => {
-      this.currenciesOnDate = this.currenciesService.sortByName(this.currenciesService.getUniqCurrencies(data));
-      if (callback) callback();
-    });
+
+    this.currencyHTTPService
+      .getCurrenciesOnDate(this.selectedDate)
+      .subscribe((data) => {
+        this.currenciesOnDate = this.currenciesService.sortByName(
+          this.currenciesService.getUniqCurrencies(data),
+        );
+        if (callback) callback();
+      });
   }
 
   //show all currencies on selected date

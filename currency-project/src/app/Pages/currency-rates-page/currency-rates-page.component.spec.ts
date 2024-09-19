@@ -8,9 +8,8 @@ describe('CurrencyRatesPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CurrencyRatesPageComponent]
-    })
-    .compileComponents();
+      declarations: [CurrencyRatesPageComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CurrencyRatesPageComponent);
     component = fixture.componentInstance;

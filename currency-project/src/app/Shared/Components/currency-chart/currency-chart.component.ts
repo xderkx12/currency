@@ -4,11 +4,10 @@ import { Chart, registerables } from 'chart.js';
 @Component({
   selector: 'app-currency-chart',
   templateUrl: './currency-chart.component.html',
-  styleUrls: ['./currency-chart.component.scss']
+  styleUrls: ['./currency-chart.component.scss'],
 })
 export class CurrencyChartComponent implements OnChanges {
-
-  @Input() chartData: { date: string, rate: number }[] = [];
+  @Input() chartData: { date: string; rate: number }[] = [];
   @Input() chartLabel: string = '';
 
   private chart?: Chart<'line'>;
@@ -31,14 +30,16 @@ export class CurrencyChartComponent implements OnChanges {
     this.chart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: this.chartData.map(data => data.date),
-        datasets: [{
-          label: this.chartLabel,
-          data: this.chartData.map(data => data.rate),
-          borderColor: 'blue',
-          backgroundColor: 'rgba(0, 0, 255, 0.2)',
-          fill: true
-        }]
+        labels: this.chartData.map((data) => data.date),
+        datasets: [
+          {
+            label: this.chartLabel,
+            data: this.chartData.map((data) => data.rate),
+            borderColor: 'blue',
+            backgroundColor: 'rgba(0, 0, 255, 0.2)',
+            fill: true,
+          },
+        ],
       },
       options: {
         responsive: true,
@@ -51,32 +52,32 @@ export class CurrencyChartComponent implements OnChanges {
             display: true,
             labels: {
               usePointStyle: true,
-              pointStyle: 'dash'
-            }
+              pointStyle: 'dash',
+            },
           },
           tooltip: {
             callbacks: {
               title: (tooltipItems) => {
                 return tooltipItems[0].label;
-              }
-            }
-          }
+              },
+            },
+          },
         },
         scales: {
           x: {
             title: {
               display: true,
-              text: 'Дата'
-            }
+              text: 'Дата',
+            },
           },
           y: {
             title: {
               display: true,
-              text: 'Цена'
-            }
-          }
-        }
-      }
+              text: 'Цена',
+            },
+          },
+        },
+      },
     });
   }
 }

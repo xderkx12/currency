@@ -4,13 +4,13 @@ import { ArchivePageComponent } from './Pages/archive-page/archive-page.componen
 import { CurrencyRatesPageComponent } from './Pages/currency-rates-page/currency-rates-page.component';
 
 const routes: Routes = [
-  {path: '', redirectTo:'currency-rate', pathMatch: 'full'},
-  {path: 'archive', component: ArchivePageComponent},
-  {path: 'currency-rate', component: CurrencyRatesPageComponent}
+  { path: '', redirectTo: 'currency-rate', pathMatch: 'full' },
+  { path: 'archive', component: ArchivePageComponent },
+  { path: 'currency-rate', component: CurrencyRatesPageComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

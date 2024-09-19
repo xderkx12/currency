@@ -19,15 +19,10 @@ import { CurrencyChartComponent } from './Shared/Components/currency-chart/curre
     ArchivePageComponent,
     HeadComponent,
     CurrencyElementComponent,
-    CurrencyChartComponent
+    CurrencyChartComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule 
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [CurrencyHTTPService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

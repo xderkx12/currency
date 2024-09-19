@@ -1,91 +1,91 @@
 .page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 30px;
+
+  .filtration {
+    background-color: #f1f3f4;
     padding: 20px;
-    gap: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
 
-    .filtration {
-        background-color: #f1f3f4;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        max-width: 100%;
-        display: flex;
-        justify-content: center;
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 15px;
+      max-width: 100%;
+      box-sizing: border-box;
+
+      label {
+        font-size: 16px;
+        font-weight: 500;
+        margin-right: 10px;
+      }
+
+      input[type="date"],
+      select {
+        padding: 8px 12px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease-in-out;
         box-sizing: border-box;
 
-        form {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 15px;
-        max-width: 100%;
-        box-sizing: border-box;
-
-        label {
-            font-size: 16px;
-            font-weight: 500;
-            margin-right: 10px;
+        &:focus {
+          border-color: #007bff;
         }
+      }
 
-        input[type="date"],
-        select {
-            padding: 8px 12px;
-            font-size: 16px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            outline: none;
-            transition: border-color 0.3s ease-in-out;
-            box-sizing: border-box;
+      input[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
 
-            &:focus {
-            border-color: #007bff;
-            }
-        }
-
-        input[type="submit"] {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
-
-            &:hover {
-            background-color: #0056b3;
-            }
-        }
-        }
-    }
-}
-
-  @media (max-width: 768px) {
-    .filtration form {
-      flex-direction: column;
-      gap: 10px;
-    }
-  
-    .filtration input[type="date"],
-    .filtration select {
-      width: 100%;
-    }
-  
-    .currency-rate {
-      table {
-        thead {
-          th {
-            font-size: 14px;
-          }
-        }
-  
-        tbody {
-          td {
-            font-size: 14px;
-          }
+        &:hover {
+          background-color: #0056b3;
         }
       }
     }
   }
+}
+
+@media (max-width: 768px) {
+  .filtration form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filtration input[type="date"],
+  .filtration select {
+    width: 100%;
+  }
+
+  .currency-rate {
+    table {
+      thead {
+        th {
+          font-size: 14px;
+        }
+      }
+
+      tbody {
+        td {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
