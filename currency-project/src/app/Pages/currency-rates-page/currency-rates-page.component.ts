@@ -19,7 +19,7 @@ export class CurrencyRatesPageComponent {
   selectedDate: string | null = null;
   selectedCurrency: string | null = null;
 
-  constructor(private currencyHTTPService: CurrencyHTTPService, private currenciesService: CurrenciesService, private dateConverter: DateConverterService) {}
+  constructor(private currencyHTTPService: CurrencyHTTPService, private currenciesService: CurrenciesService) {}
 
   //initialization all elements on page
   ngOnInit(): void {
@@ -29,7 +29,7 @@ export class CurrencyRatesPageComponent {
 
   //set current day in data input
   setCurrentDay(): void {
-    this.selectedDate = this.dateConverter.getFormattedDate(new Date());
+    this.selectedDate = DateConverterService.getFormattedDate(new Date());
     console.log(this.selectedDate);
   }
 
