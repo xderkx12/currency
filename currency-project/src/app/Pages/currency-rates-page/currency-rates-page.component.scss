@@ -1,0 +1,40 @@
+.page {
+  .currency-rate {
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      thead {
+        background-color: #007bff;
+        color: white;
+
+        th {
+          padding: 15px;
+          font-size: 16px;
+          font-weight: 600;
+          text-align: left;
+        }
+      }
+
+      tbody {
+        tr {
+          &:nth-child(even) {
+            background-color: #f8f9fa; // Чередование цвета строк для лучшего восприятия
+          }
+
+          td {
+            padding: 15px;
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+          }
+        }
+      }
+    }
+  }
+}

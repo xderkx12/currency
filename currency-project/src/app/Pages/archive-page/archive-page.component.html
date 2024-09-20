@@ -1,0 +1,29 @@
+<div class="page">
+  <div class="filtration">
+    <form (ngSubmit)="onSubmit()">
+      <label>Выберите начала периода:</label>
+      <input [(ngModel)]="selectedStartDate" name="date" type="date" required />
+      <label>Выберите конец периода:</label>
+      <input [(ngModel)]="selectedEndDate" name="date" type="date" required />
+
+      <label>Выберите валюту:</label>
+      <select [(ngModel)]="selectedCurrency" name="currency" required>
+        <option value="null">Все валюты...</option>
+        <option
+          *ngFor="let currency of currencies"
+          [value]="currency.Cur_Abbreviation"
+        >
+          {{ currency.Cur_Name }} ({{ currency.Cur_Abbreviation }})
+        </option>
+      </select>
+
+      <input type="submit" value="Отправить" />
+    </form>
+  </div>
+  <div class="continer-graph" *ngIf="isShowGraph">
+    <app-currency-chart
+      [chartData]="chartData"
+      [chartLabel]="chartLabel"
+    ></app-currency-chart>
+  </div>
+</div>
