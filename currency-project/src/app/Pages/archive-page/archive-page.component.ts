@@ -57,12 +57,13 @@ export class ArchivePageComponent implements OnInit {
           this.selectedCurrency,
         )
         .subscribe((data) => {
-          this.chartData = data.map((currency) => ({
-            date: DateConverterService.getFormattedDate(
-              new Date(currency.Date),
-            ),
-            rate: currency.Cur_OfficialRate,
-          }));
+          this.chartData = data.map((currency) => {
+            const rate = currency.Cur_OfficialRate > 10 ? currency.Cur_OfficialRate / 10000 : currency.Cur_OfficialRate;
+            return {
+              date: DateConverterService.getFormattedDate(new Date(currency.Date)),
+              rate: rate,
+            }
+          })
         });
     }
   }

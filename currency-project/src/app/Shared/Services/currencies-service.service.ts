@@ -6,7 +6,7 @@ import { Currency } from '../Types/currency';
 })
 export class CurrenciesService {
   constructor() {}
-
+  
   getUniqCurrencies(currencies: Currency[]): Currency[] {
     const sennAbreviations = new Set<string>();
 
